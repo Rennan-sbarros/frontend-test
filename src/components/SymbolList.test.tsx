@@ -17,7 +17,6 @@ const renderSymbolList = () => {
   render(
     <WebsocketContext.Provider value={{ 
       addSymbol: mockAddSymbol, 
-      removeSymbol: mockRemoveSymbol, 
       prices: mockPrices, 
       loading: mockLoading 
     }}>
@@ -98,7 +97,6 @@ describe('SymbolList Component', () => {
     render(
       <WebsocketContext.Provider value={{ 
         addSymbol: mockAddSymbol,
-        removeSymbol: mockRemoveSymbol,
         prices: mockPrices,  
         loading: true 
       }}>

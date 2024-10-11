@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { fetchSymbols } from '../services/binanceService';
-import { WebsocketContext } from '../context/WatchListContext';
 import {
   Box, Checkbox, Button, FormControlLabel, Paper, List, ListItem, TextField, InputAdornment 
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
+import { WebsocketContext } from '../context/WatchListContext';
 
 interface SymbolData {
   symbol: string;

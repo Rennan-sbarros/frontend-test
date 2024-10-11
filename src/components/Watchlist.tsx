@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import { WebsocketContext } from '../context/WatchListContext';
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Backdrop, CircularProgress,
-  IconButton, styled, tableCellClasses
+  styled, tableCellClasses
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-
 
 const WatchList: React.FC = () => {
-  const { prices, removeSymbol, loading } = useContext(WebsocketContext)!;
+  const { prices, loading } = useContext(WebsocketContext)!;
 
   const formatPrice = (price: string) => parseFloat(price).toFixed(4);
 
@@ -67,7 +65,6 @@ const WatchList: React.FC = () => {
                 <StyledTableCell align="right">Bid Price</StyledTableCell>
                 <StyledTableCell align="right">Ask Price</StyledTableCell>
                 <StyledTableCell align="right">Price Change (%)</StyledTableCell>
-                <StyledTableCell align="right">Remove</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -80,11 +77,6 @@ const WatchList: React.FC = () => {
                   <TableCell align="right">{formatPrice(bestBidPrice)}</TableCell>
                   <TableCell align="right">{formatPrice(bestAskPrice)}</TableCell>
                   <TableCell align="right">{formatPercentage(priceChangePercent)}</TableCell>
-                  <TableCell align="right">
-                    <IconButton onClick={() => removeSymbol(symbol)} color="error" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

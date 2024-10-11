@@ -12,7 +12,6 @@ const renderWatchList = () => {
     render(
       <WebsocketContext.Provider value={{ 
         addSymbol: mockAddSymbol, 
-        removeSymbol: mockRemoveSymbol, 
         prices: mockPrices, 
         loading: mockLoading 
       }}> <WatchList />
@@ -36,7 +35,7 @@ describe('WatchList Component', () => {
     const mockLoading = false;
   
     render(
-      <WebsocketContext.Provider value={{ prices: mockPricesWithSymbols, addSymbol: mockAddSymbol, removeSymbol: mockRemoveSymbol, loading: mockLoading }}>
+      <WebsocketContext.Provider value={{ prices: mockPricesWithSymbols, addSymbol: mockAddSymbol, loading: mockLoading }}>
         <WatchList />
       </WebsocketContext.Provider>
     );
@@ -46,25 +45,6 @@ describe('WatchList Component', () => {
   
     expect(screen.getByText('50000.0000')).toBeInTheDocument();
     expect(screen.getByText('2.00%')).toBeInTheDocument(); 
-  });
-  
-  it('removes symbol when delete icon is clicked', () => {
-    const mockPricesWithSymbols = {
-      BTCUSDT: { lastPrice: '50000', priceChangePercent: '0.05', bestBidPrice: '49999', bestAskPrice: '50001' }
-    };
-  
-    const mockLoading = false;
-  
-    render(
-      <WebsocketContext.Provider value={{ prices: mockPricesWithSymbols,  addSymbol: mockAddSymbol, removeSymbol: mockRemoveSymbol, loading: mockLoading }}>
-        <WatchList />
-      </WebsocketContext.Provider>
-    );
-  
-    const deleteButton = screen.getByRole('button', { name: /delete/i });
-    fireEvent.click(deleteButton);
-  
-    expect(mockRemoveSymbol).toHaveBeenCalledWith('BTCUSDT');
   });
   
 });

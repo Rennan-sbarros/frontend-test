@@ -1,7 +1,7 @@
 import React from 'react';
 import SymbolList from '../components/SymbolList';
-import { WebsocketProvider } from '../context/WatchListContext';
 import WatchList from '../components/WatchList';
+import { WebsocketProvider } from '../context/WatchListContext';
 
 const Home: React.FC = () => {
   return (

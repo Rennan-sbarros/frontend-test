@@ -5,7 +5,6 @@ import { PriceUpdate } from '../types/PriceUpdate';
 interface WebsocketContextProps {
   prices: { [key: string]: PriceUpdate };
   addSymbol: (symbol: string) => void;
-  removeSymbol: (symbol: string) => void;
   loading: boolean;
 }
 
@@ -24,12 +23,8 @@ export const WebsocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     });
   };
 
-  const removeSymbol = (symbol: string) => {
-    setSelectedSymbols((prevSymbols) => prevSymbols.filter((s) => s !== symbol));
-  };
-
   return (
-    <WebsocketContext.Provider value={{ prices, addSymbol, removeSymbol, loading }}>
+    <WebsocketContext.Provider value={{ prices, addSymbol, loading }}>
       {children}
     </WebsocketContext.Provider>
   );
