@@ -1,9 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { WebsocketContext } from '../context/WatchListContext';
-import WatchList from './WatchList';
+import WatchList from './Watchlist';
 
 // Mock da função e dos dados de contexto
-const mockRemoveSymbol = jest.fn();
 const mockAddSymbol = jest.fn();
 const mockPrices = {}; 
 const mockLoading = false;
