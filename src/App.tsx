@@ -1,6 +1,5 @@
-// src/App.tsx
 import React from 'react';
-import { WebsocketProvider } from './context/WatchlistContext';
+import { WebsocketProvider } from './context/WatchListContext';
 import Home from './pages/Home';
 
 const App: React.FC = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { fetchSymbols } from '../services/binanceService';
-import { WebsocketContext } from '../context/WatchlistContext';
+import { WebsocketContext } from '../context/WatchListContext';
 import {
   Box, Checkbox, Button, FormControlLabel, Paper, List, ListItem, TextField, InputAdornment 
 } from '@mui/material';
@@ -48,7 +48,7 @@ const SymbolList: React.FC = () => {
   );
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', width: '25%', height: '90vh', padding: '10px', borderRadius: '7px', border: '1px solid #e0e0e0'  }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: '25%', height: '90vh', padding: '10px', borderRadius: '7px', border: '1px solid #e0e0e0'}} data-testid="content-symbolList">
       <TextField
         label="Search symbol"
         variant="outlined"

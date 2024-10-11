@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { WebsocketContext } from '../context/WatchlistContext';
+import { WebsocketContext } from '../context/WatchListContext';
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Backdrop, CircularProgress,
   IconButton, styled, tableCellClasses
@@ -7,7 +7,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-const Watchlist: React.FC = () => {
+const WatchList: React.FC = () => {
   const { prices, removeSymbol, loading } = useContext(WebsocketContext)!;
 
   const formatPrice = (price: string) => parseFloat(price).toFixed(4);
@@ -25,7 +25,7 @@ const Watchlist: React.FC = () => {
   }));
 
   return (
-    <Box sx={{ width: '75%'}}>
+    <Box sx={{ width: '75%'}} data-testid="content-watchList">
       <TableContainer component={Paper} sx={{ padding: '10px', width: 'auto', height: '90vh', borderRadius: '7px', border: '1px solid #e0e0e0'}}>
         <Backdrop
           open={loading}
@@ -59,7 +59,7 @@ const Watchlist: React.FC = () => {
           </Box>
       
         ) : (
-          <Table stickyHeader aria-label="symbol watchlist table">
+          <Table stickyHeader aria-label="symbol watchList table">
             <TableHead>
               <TableRow>
                 <StyledTableCell align="left">Symbol</StyledTableCell>
@@ -81,7 +81,7 @@ const Watchlist: React.FC = () => {
                   <TableCell align="right">{formatPrice(bestAskPrice)}</TableCell>
                   <TableCell align="right">{formatPercentage(priceChangePercent)}</TableCell>
                   <TableCell align="right">
-                    <IconButton onClick={() => removeSymbol(symbol)} color="error">
+                    <IconButton onClick={() => removeSymbol(symbol)} color="error" aria-label="delete">
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -96,4 +96,4 @@ const Watchlist: React.FC = () => {
   );
 };
 
-export default Watchlist;
+export default WatchList;
