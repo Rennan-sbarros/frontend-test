@@ -11,12 +11,14 @@ export const useWebsocket = (selectedSymbols: string[]) => {
   const [prices, setPrices] = useState<{ [key: string]: PriceUpdate }>({});
   const [loading, setLoading] = useState(true);
   const socketRef = useRef<WebSocket | null>(null);
-  const receivedSymbols = useRef<Set<string>>(new Set()); 
+  const receivedSymbols = useRef<Set<string>>(new Set());
+  const updatesBuffer = useRef<{ [key: string]: PriceUpdate }>({});
 
   useEffect(() => {
     if (selectedSymbols.length > 0) {
-      setLoading(true); 
+      setLoading(true);
       receivedSymbols.current.clear();
+      updatesBuffer.current = {};
 
       if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
         socketRef.current.close();
@@ -34,14 +36,15 @@ export const useWebsocket = (selectedSymbols: string[]) => {
         if (message && message.data) {
           const { s: symbol, c: lastPrice, P: priceChangePercent, b: bestBidPrice, a: bestAskPrice } = message.data;
 
-          setPrices((prevPrices) => ({
-            ...prevPrices,
-            [symbol]: { lastPrice, priceChangePercent, bestBidPrice, bestAskPrice },
-          }));
+          updatesBuffer.current[symbol] = { lastPrice, priceChangePercent, bestBidPrice, bestAskPrice };
           receivedSymbols.current.add(symbol);
 
           if (receivedSymbols.current.size === selectedSymbols.length) {
-            setLoading(false); 
+            setPrices((prevPrices) => ({
+              ...prevPrices,
+              ...updatesBuffer.current,
+            }));
+            setLoading(false);
           }
         }
       };

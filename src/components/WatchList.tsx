@@ -5,11 +5,11 @@ import {
   styled, tableCellClasses
 } from '@mui/material';
 
-const WatchList: React.FC = () => {
+const WatchList: React.FC = React.memo(() => {
   const { prices, loading } = useContext(WebsocketContext)!;
 
   const formatPrice = (price: string) => parseFloat(price).toFixed(4);
-
+  
   const formatPercentage = (priceChangePercent:string) => Math.abs(parseFloat(priceChangePercent) * 100).toFixed(2) + '%';
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -34,7 +34,7 @@ const WatchList: React.FC = () => {
             width: '100%',
             height: '100%',
             backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            zIndex: 1000, 
+            zIndex: 1000,
           }}
         >
           <CircularProgress color="primary" />
@@ -55,8 +55,8 @@ const WatchList: React.FC = () => {
           >
             <span>Não há símbolos adicionados</span>
           </Box>
-      
-        ) : (
+
+) : (
           <Table stickyHeader aria-label="symbol watchList table">
             <TableHead>
               <TableRow>
@@ -70,9 +70,7 @@ const WatchList: React.FC = () => {
             <TableBody>
               {Object.entries(prices).map(([symbol, { lastPrice, priceChangePercent, bestBidPrice, bestAskPrice }]) => (
                 <TableRow key={symbol}>
-                  <TableCell component="th" scope="row">
-                    {symbol}
-                  </TableCell>
+                  <TableCell component="th" scope="row">{symbol}</TableCell>
                   <TableCell align="right">{formatPrice(lastPrice)}</TableCell>
                   <TableCell align="right">{formatPrice(bestBidPrice)}</TableCell>
                   <TableCell align="right">{formatPrice(bestAskPrice)}</TableCell>
@@ -82,10 +80,9 @@ const WatchList: React.FC = () => {
             </TableBody>
           </Table>
         )}
-        
       </TableContainer>
     </Box>
   );
-};
+});
 
 export default WatchList;
